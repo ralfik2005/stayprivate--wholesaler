@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Add New User</h1>
+<div mat-dialog-content>
+  <form [formGroup]="addUserForm" class="company-form">
+   
+     <mat-form-field class="full-width">   
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="John Doe" formControlName="name" autocomplete="off">
+        <mat-error *ngIf="addUserForm.controls['name'].hasError('required')">
+            A name is <strong>required</strong>
+          </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field class="full-width">   
+        <mat-label>Email Address</mat-label>
+        <input matInput type="email" placeholder="john@examplecompany.com" formControlName="emailAddress" autocomplete="off">        
+        <mat-error *ngIf="addUserForm.controls['emailAddress'].hasError('required')">
+            A email is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="addUserForm.controls['emailAddress'].hasError('pattern')">
+            Please provide a <strong>valid</strong> email address
+        </mat-error>            
+      </mat-form-field>
+
+
+      <mat-form-field class="full-width">   
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" autocomplete="off">
+        <mat-error class="full-width" *ngIf="addUserForm.controls['password'].hasError('required')">
+            A password is <strong>required</strong>
+        </mat-error>
+        <mat-error  class="full-width" *ngIf="addUserForm.controls['password'].hasError('pattern')">
+            Requires both upper and lower case letters and at least one number
+        </mat-error>   
+      </mat-form-field>
+
+
+      <mat-form-field class="full-width">   
+        <mat-label>Confirm Password</mat-label>
+        <input matInput matchingValidator="password" formControlName="passwordConfirm" autocomplete="off" >  
+        <mat-error  *ngIf="addUserForm.controls['passwordConfirm'].hasError('required')">
+            A password is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="addUserForm.controls['passwordConfirm'].hasError('notEqual')">
+            Passwords must match
+        </mat-error> 
+             
+      </mat-form-field>  
+    </form>   
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="cancel-button" (click)="onNoClick()">Cancel</button>
+  <button mat-button class="ok-button" [disabled]="!addUserForm.valid" (click)="onSubmit()" cdkFocusInitial>OK</button>
+</div>

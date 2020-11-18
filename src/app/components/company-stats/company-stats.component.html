@@ -1,0 +1,139 @@
+<mat-card class="form-padding">
+  <mat-card-title class="add-company-title sp-title">
+    Usage statistics
+   </mat-card-title>
+  <mat-card-content class="stats-area">
+    <div class="row">
+      <div class="col-md">
+        <div class="stat-display-block sp-background">
+          <div class="stat-display-title">
+            Recipients:
+          </div>
+          <div class="stat-display-stat">
+            {{recipientTotal}}
+          </div>
+        </div>
+      </div> 
+      <div class="col-md">
+        <div class="stat-display-block sp-background">
+          <div class="stat-display-title">
+            Storage:
+          </div>
+          <div class="stat-display-stat">
+            {{storageTotal | number:'1.1-1'}}GB
+          </div>
+        </div>
+      </div> 
+      <!-- <div class="col-md">
+        <div class="stat-display-block sp-background">
+          <div class="stat-display-title">
+            Monthly retail price:
+          </div>
+          <div class="stat-display-stat">
+            {{monthlyRetailPrice | currency : 'GBP' : true : '1.2-2'}}
+          </div>
+        </div>
+      </div>  -->
+    </div>
+
+    <div class="row">
+      <div class="col-md">
+        <div class="stat-display-block sp-grey">
+          <div class="stat-display-title stat-title-2">
+            Emails sent
+          </div>
+          <div class="stat-display-subsection">
+            <div class="stat-display-subtitle">
+              in last 24 hours:
+            </div>
+            <div class="stat-display-substat">
+              {{emailSent24h}}
+            </div>
+          </div>
+          <div class="stat-display-subsection">
+            <div class="stat-display-subtitle">
+              in last 7 days:
+            </div>
+            <div class="stat-display-substat">
+              {{emailSent7d}}
+            </div>
+          </div>
+          <div class="stat-display-subsection">
+            <div class="stat-display-subtitle">
+              in last 28 days:
+            </div>
+            <div class="stat-display-substat">
+              {{emailSent28d}}
+            </div>
+          </div>
+          <div class="stat-display-subsection">
+            <div class="stat-display-subtitle">
+              in total:
+            </div>
+            <div class="stat-display-substat">
+              {{emailSentTotal}}
+            </div>
+          </div>
+        </div>
+      </div> 
+      <div class="col-md">
+        <div class="stat-display-block sp-grey">
+          <div class="stat-display-title stat-title-2">
+            Emails received
+          </div>
+          <div class="stat-display-subsection">
+            <div class="stat-display-subtitle">
+              in last 24 hours:
+            </div>
+            <div class="stat-display-substat">
+              {{emailReceived24h}}
+            </div>
+          </div>
+          <div class="stat-display-subsection">
+            <div class="stat-display-subtitle">
+              in last 7 days:
+            </div>
+            <div class="stat-display-substat">
+              {{emailReceived7d}}
+            </div>
+          </div>
+          <div class="stat-display-subsection">
+            <div class="stat-display-subtitle">
+              in last 28 days:
+            </div>
+            <div class="stat-display-substat">
+              {{emailReceived28d}}
+            </div>
+          </div>
+          <div class="stat-display-subsection">
+            <div class="stat-display-subtitle">
+              in total:
+            </div>
+            <div class="stat-display-substat">
+              {{emailSentTotal}}
+            </div>
+          </div>
+        </div>
+      </div> 
+      <div class="col-md">
+        <div class="stat-display-block sp-grey ">
+          <div class="stat-display-title">
+            Company users:
+          </div>
+          <div class="stat-display-stat">
+            {{userTotal}}
+          </div>
+        </div>
+      </div> 
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="date-time-text">
+          <aside></aside> as at {{dateAccessed}}
+        </div>
+      </div>
+    </div>  
+    <app-line-graph></app-line-graph>
+  </mat-card-content>
+</mat-card>

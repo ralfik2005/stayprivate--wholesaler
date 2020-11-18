@@ -1,0 +1,8 @@
+.spinner{float:left; 
+    width: 24px; 
+    height: 24px; 
+    margin: 5px 10px 0px 0px;}
+.ok-button{float:right;position: relative;left:22px}
+.mat-dialog-actions{display:block;margin-top: 5px;}
+
+.cancel-button{position: relative;right:14px;}

@@ -1,0 +1,33 @@
+<mat-card class="form-padding">
+    <mat-card-title class="add-company-title sp-title">
+      Users
+      <button mat-icon-button (click)="openAddUser()" *ngIf="companyDomain" class="add-button"><mat-icon>add</mat-icon></button>      
+    </mat-card-title>
+    <mat-card-content>
+      
+      <mat-error class="add-user-company-notice" *ngIf="!companyDomain">
+        To add a user please enter a company domain
+      </mat-error> 
+      <div *ngIf="users!=null">
+      <table mat-table [dataSource]="users" *ngIf="users.length>0"class="mat-elevation-z2">>
+        <!-- Position Column -->
+        <ng-container matColumnDef="LoginUserName">
+          <th mat-header-cell *matHeaderCellDef> User Name </th>
+          <td mat-cell *matCellDef="let user"> {{user.LoginUserName}} </td>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="PersonalName">
+          <th mat-header-cell *matHeaderCellDef> Personal Name </th>
+          <td mat-cell *matCellDef="let user"> {{user.PersonalName}} </td>
+        </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="EmailAddress">
+          <th mat-header-cell *matHeaderCellDef> Email Address </th>
+          <td mat-cell *matCellDef="let user"> {{user.EmailAddress}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>  
+      </div>
+    </mat-card-content>
+  </mat-card>

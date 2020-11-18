@@ -1,0 +1,36 @@
+.add-company-title {padding-bottom: 20px;padding-left: 15px;padding-top:15px;}
+
+.stats-area {padding:5px 15px;}
+
+.stat-display-block {margin-bottom:30px;padding:13px 20px 20px;border-radius: 10px;color:#fff;min-height: 80px;}
+
+.stat-display-title {font-size: 1.5em;height:30px;}
+
+.stat-display-stat {font-size: 2.5em;float:right;padding-bottom: 20px;}
+
+.date-time-text {float:right;}
+
+.stat-display-subsection {margin-top:15px; width:100%;height:25px;}
+
+.stat-display-subtitle {float:left;}
+
+.stat-display-substat {float:right;font-size: 2em;}
+
+.sp-grey {background-color: #aaa;}
+
+@media (max-width: 1070px){
+  .stat-display-title{font-size:1em;}
+  .stat-display-stat {font-size: 1.75em;}
+}
+
+@media (max-width: 767px){
+  .stat-display-title{font-size:1.5em;float:left;}
+  .stat-display-block{padding-top: 20px;min-height:58px;}
+  .stat-title-2{float:none;}
+}
+
+@media (max-width: 500px){
+  .stat-display-title{font-size:1.0em;float:left;}
+  .stat-display-block{padding-top: 20px;min-height:58px;}
+  .stat-title-2{float:none;}
+}

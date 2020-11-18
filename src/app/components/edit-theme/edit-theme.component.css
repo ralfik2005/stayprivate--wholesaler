@@ -1,0 +1,96 @@
+
+.main-container { position: absolute; top: 64px; bottom: 0; left: 0; right: 0; }
+@media (max-width: 599px){
+  .main-container{ top: 56px; }
+}
+
+.nav-menu-button { padding-left: 10px; padding-right: 10px; min-width:10px; 
+                   position: relative; left: -10px;}
+
+.sidenav-container { padding-top: 10px;overflow:hidden; width:200px }
+
+.sidenav-inner-container {overflow:hidden;}
+
+.color-text { padding-right:0px;max-width: fit-content;}
+
+.nav-menu-link { width: 100%; max-width: 200px; text-align: left; margin:0px 0px;padding: 10px;}
+
+.nav-menu-link-active { background-color: #fafafa; }
+
+.main-stage { padding: 18px; }
+
+.full-width {width: 400px; max-width:100%; margin: 15px;}
+.full-width-2 {width: 400px; max-width:100%; margin: 15px;margin-top: -15px;}
+
+.add-company-title {padding-bottom: 20px;padding-left: 15px;padding-top:15px;}
+
+.theme-button {margin-right: 0px;margin-top:5px;float: right;margin-bottom: 15px;}
+
+.logo-button {margin-top:5px;}
+
+.clear-button {float: left;margin-left: 15px; background-color: #999;}
+
+.form-padding {max-width: 600px;padding: 30px;}
+
+.form-group {margin-bottom: 0px;}
+
+.logo-box {display: table; padding: 30px; text-align: center;}
+
+.button-container{text-align: right;width: 100%;display: inline-block}
+
+.shorter-col{max-width: 500px;}
+
+@media (max-width: 1250px){
+  .full-width, .full-width-2 {width: 300px;} 
+}
+
+@media (max-width: 1050px){
+  .full-width, .full-width-2 {width: 250px;} 
+}
+
+@media (max-width: 767px){
+  .full-width, .full-width-2 {width: 280px;} 
+  .domain-button {position: relative; bottom: 30px;}
+  .add-company-button {margin-right: -3px;}
+}
+
+.title-spacer{padding-bottom: 25px;}
+.v-short-col{max-width: 300px;}
+
+input[type=color] {
+    width: 100px;
+    height: 100px; 
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
+}
+
+input[type=color]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+}
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 500;
+  display: table;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+  padding: 8px 16px;
+  float: right;
+}
+
+.image-adj{max-width: 252px;}

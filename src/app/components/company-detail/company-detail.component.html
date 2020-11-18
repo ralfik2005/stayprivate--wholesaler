@@ -1,0 +1,241 @@
+<mat-toolbar>
+  <button mat-button class="nav-menu-button sp-topnav" (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+  <span class="top-title sp-topnav">{{appName}}</span>
+  <div class="top-right-button">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+    <mat-icon class="">account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/account']">
+        <mat-icon>account_circle</mat-icon>
+        <span>My Account</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Log Out</span>
+      </button>
+    </mat-menu>
+  </div>
+
+</mat-toolbar>  
+<mat-sidenav-container class="main-container">
+  <mat-sidenav class="sidenav-container" [opened]="start" #sidenav [mode]="mode.value">
+    <div>
+      <button mat-button class="nav-menu-link sp-sidenav" [routerLink]="['/home']">
+        Home
+      </button>
+    </div>
+    <div *ngIf="myCompanyType=='Wholesaler'||myCompanyType=='Super'||myCompanyType=='Reseller'">
+      <button mat-button class="nav-menu-link sp-sidenav" [routerLink]="['/add-company']">
+        Add New Company
+      </button>
+    </div>
+    <div>
+      <button mat-button class="nav-menu-link sp-sidenav" routerLinkActive="nav-menu-link-active" [routerLink]="['/mycompany']">
+        My Company
+      </button>
+    </div>
+    <div *ngIf="myCompanyType=='Wholesaler'||myCompanyType=='Super'">
+      <button mat-button class="nav-menu-link sp-sidenav" [routerLink]="['/edit-theme']">
+        My Theme
+      </button>
+    </div>
+    <div>
+      <button mat-button class="nav-menu-link sp-sidenav">
+        Contracts &amp; Terms
+      </button>
+    </div>
+    <div>
+      <button mat-button class="nav-menu-link sp-sidenav">
+        User Guides
+      </button>
+    </div>
+    <div>
+      <hr class="nav-menu-sp"style="width: 200px; bottom: 40px">
+      <span class="nav-menu-link nav-menu-sp sp-sidenav ">        
+        Powered by
+        <img class="loginImage nav-menu-img" src="/assets/images/SP_Logo_Icon+Text_Blue.svg"/>
+      </span>
+    </div>
+  </mat-sidenav>  
+
+  <mat-sidenav-content class="main-stage">    
+    <mat-tab-group>
+    <mat-tab label="Details">
+    <form [formGroup]="addCompanyForm"  class="company-form">
+      <mat-card class="form-padding">
+        <mat-card-title class="add-company-title sp-title">
+          {{addCompanyForm.value.CompanyName}} <span class="company-ident-title">{{companyIdentTitle}}</span>
+          <button class="edit-button" mat-icon-button *ngIf="!editMode" (click)="editClicked()"><mat-icon>edit</mat-icon></button>
+        </mat-card-title>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md shorter-col">          
+              <!-- Company Type Selector -->
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Company Type</mat-label>
+                    <input matInput placeholder="example-company-name" formControlName="CompanyType" >
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Company Ident Field -->
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Unique company identifier</mat-label>
+                    <input matInput placeholder="example-company-name" formControlName="CompanyIdent" >
+                    <mat-error *ngIf="addCompanyForm.controls['CompanyIdent'].hasError('required')">
+                      Company identifier is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Company Name Field -->
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Company name</mat-label>
+                    <input matInput placeholder="Example Company Ltd" formControlName="CompanyName">
+                    <mat-error *ngIf="addCompanyForm.controls['CompanyName'].hasError('required')">
+                      Company name is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Company Telephone Field -->
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Company telephone number</mat-label>
+                    <input matInput placeholder="" formControlName="CompanyTelNo">
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Company VAT Field -->
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Company VAT number</mat-label>
+                    <input matInput placeholder="" formControlName="CompanyVatNo">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Company Address Field -->
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Company address</mat-label>
+                    <textarea matInput placeholder="" formControlName="CompanyAddress" rows="3"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-md shorter-col">
+              <!-- Email Domain Field -->
+              <div class="row domain-row"  >
+                <!--div class="col" formArrayName="DomainList" >
+                    
+                  <h4>Domains<button mat-icon-button *ngIf="editMode" (click)="addNewItem()"><mat-icon>add</mat-icon></button></h4>
+                  
+                  <div class="form-group" *ngFor="let domainControl of getControls(); let i = index">
+                      <mat-form-field class="full-width">   
+                          <mat-label>Domain {{i+1}}</mat-label>
+                          <input matInput placeholder="@stayprivate.com" [formControlName]="i">
+                      </mat-form-field>
+                      <button mat-icon-button *ngIf="editMode" (click)="deleteNewItem(i)"><mat-icon>delete</mat-icon></button>
+                  </div>
+                </div-->
+
+                <div class="col" formArrayName="DomainList" >   
+                  <div class="form-group" *ngFor="let domainControl of getControls(); let i = index">
+                    <mat-form-field *ngIf="i==0" class="full-width">   
+                      <mat-label>Company domain</mat-label>
+                      <input matInput placeholder="@examplecompany.com" [formControlName]="i">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="i>=1" class="full-width-2">   
+                      <mat-label >Company domain {{i+1}}</mat-label>
+                      <input matInput placeholder="@examplecompany.com" [formControlName]="i">
+                    </mat-form-field>
+                    <button mat-icon-button class="domain-button" *ngIf="i==0 && editMode" (click)="addNewItem()"><mat-icon>add</mat-icon></button>
+                    <button mat-icon-button class="domain-button" *ngIf="i>=1 && editMode" (click)="deleteNewItem(i)"><mat-icon>remove</mat-icon></button>
+                  </div>
+                </div>
+
+
+
+
+              </div>        
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Pricing tier</mat-label>
+                    <mat-select [formControl]="addCompanyForm.controls['InitialTier']"  >
+                      <mat-option *ngFor="let initialTier of initialTiers" [value]="initialTier.value">
+                        {{initialTier.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>  
+              <!-- Contact Name Field -->
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Contact name</mat-label>
+                    <input matInput placeholder="John Doe" formControlName="ContactName" multiple>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Contact Email Field -->
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Contact email</mat-label>
+                    <input matInput placeholder="example@stayprivate.com" formControlName="ContactEmail" multiple>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Contact Telephone Field -->
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Contact telephone number</mat-label>
+                    <input matInput placeholder="02084565148" formControlName="ContactTelNo">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- SetUp Email Field -->
+          <!-- <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">   
+                <mat-label>Setup user email</mat-label>
+                <input matInput placeholder="example@stayprivate.com" formControlName="SetUpUserEmail">
+              </mat-form-field>
+            </div>
+          </div> -->
+          <div class="row button-container"*ngIf="editMode" >
+            
+            <button mat-flat-button color="primary" [disabled]="!addCompanyForm.dirty" class="sp-background add-company-button" (click)="onSubmit()">Update Company</button>
+            <button mat-flat-button color="primary" class="sp-background add-company-button" (click)="onCancel()">Cancel Edit</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </mat-tab>
+  <mat-tab *ngIf="companytype!='Client'" label="Users"> <ng-template matTabContent> <app-user-list></app-user-list> </ng-template> </mat-tab>
+  <mat-tab label="Statistics"> <app-company-stats></app-company-stats> </mat-tab>
+</mat-tab-group>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+
+
+

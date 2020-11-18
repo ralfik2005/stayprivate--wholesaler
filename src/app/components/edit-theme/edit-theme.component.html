@@ -1,0 +1,144 @@
+<mat-toolbar>
+  <button mat-button class="nav-menu-button sp-topnav" (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+  <span class="top-title sp-topnav">{{appName}}</span>
+  <div class="top-right-button">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+    <mat-icon class="">account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/account']">
+        <mat-icon>account_circle</mat-icon>
+        <span>My Account</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Log Out</span>
+      </button>
+    </mat-menu>
+  </div>
+
+</mat-toolbar>  
+<mat-sidenav-container class="main-container">
+  <mat-sidenav class="sidenav-container" [opened]="start" #sidenav [mode]="mode.value">
+    <div>
+      <button mat-button class="nav-menu-link sp-sidenav" [routerLink]="['/home']">
+        Home
+      </button>
+    </div>
+    <div *ngIf="myCompanyType=='Wholesaler'||myCompanyType=='Super'||myCompanyType=='Reseller'">
+      <button mat-button class="nav-menu-link sp-sidenav" [routerLink]="['/add-company']">
+        Add New Company
+      </button>
+    </div>
+    <div>
+      <button mat-button class="nav-menu-link sp-sidenav" [routerLink]="['/mycompany']">
+        My Company
+      </button>
+    </div>
+    <div *ngIf="myCompanyType=='Wholesaler'||myCompanyType=='Super'">
+      <button mat-button class="nav-menu-link sp-sidenav nav-menu-link-active">
+        My Theme
+      </button>
+    </div>
+    <div>
+      <button mat-button class="nav-menu-link sp-sidenav">
+        Contracts &amp; Terms
+      </button>
+    </div>
+    <div>
+      <button mat-button class="nav-menu-link sp-sidenav">
+        User Guides
+      </button>
+    </div>
+    <div>
+      <hr class="nav-menu-sp"style="width: 200px; bottom: 40px">
+      <span class="nav-menu-link nav-menu-sp sp-sidenav ">        
+        Powered by
+        <img class="loginImage nav-menu-img" src="/assets/images/SP_Logo_Icon+Text_Blue.svg"/>
+      </span>
+    </div>
+  </mat-sidenav>   
+    <mat-sidenav-content class="main-stage">
+      <form [formGroup]="themeForm" *ngIf="this.myCompanyType!='Client'">
+      <mat-card class="form-padding">
+        <mat-card-title class="title-spacer sp-title">Your theme</mat-card-title>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md shorter-col v-short-col">              
+              <div class="row">
+                <div class="col color-text">
+                  <p style="margin: 0px;display: contents;">Button background:</p><br>
+                  <mat-form-field class="half-width">
+                    <mat-label>Hex</mat-label>
+                    <input matInput [value]="themeForm.value.background" formControlName="background"style>                    
+                </mat-form-field>                 
+                </div>
+                <div class="col"><input type="color" [value]="themeForm.value.background" formControlName="background" class='bar' maxlength="10" id='colour' style="height: 50px;width: 50px;" ></div>   
+              </div>
+              <div class="row">
+                <div class="col color-text">
+                  <p style="margin: 0px;display: contents;">Title:</p><br>
+                  <mat-form-field class="half-width">
+                    <mat-label>Hex</mat-label>
+                    <input matInput [value]="themeForm.value.foreground" formControlName="foreground"style>                    
+                </mat-form-field>                 
+                </div>
+                <div class="col"><input type="color" [value]="themeForm.value.foreground" formControlName="foreground" class='bar' maxlength="10" id='colour' style="height: 50px;width: 50px;" ></div>   
+              </div>
+            </div>
+            <div class="col-md shorter-col v-short-col">              
+              <div class="row">
+                <div class="col color-text">
+                  <p style="margin: 0px;display: contents;">Side bar:</p><br>
+                  <mat-form-field class="half-width">
+                    <mat-label>Hex</mat-label>
+                    <input matInput [value]="themeForm.value.highlight" formControlName="highlight"style>                    
+                </mat-form-field>                 
+                </div>
+                <div class="col"><input type="color" [value]="themeForm.value.highlight" formControlName="highlight" class='bar' maxlength="10" id='colour' style="height: 50px;width: 50px;" ></div>   
+              </div>
+              <div class="row">
+                <div class="col color-text">
+                  <p style="margin: 0px;display: contents;">Top bar:</p><br>
+                  <mat-form-field class="half-width">
+                    <mat-label>Hex</mat-label>
+                    <input matInput [value]="themeForm.value.border" formControlName="border"style>                    
+                </mat-form-field>                 
+                </div>
+                <div class="col"><input type="color" [value]="themeForm.value.border" formControlName="border" class='bar' maxlength="10" id='colour' style="height: 50px;width: 50px;" ></div>   
+              </div>
+            </div>
+            <div class="col-md shorter-col v-short-col"> 
+              <div class="row">
+                <div class="col color-text">
+                  <p style="margin: 0px;display: contents;position: relative;top:10px;">Dashboard name:</p>
+                  <mat-form-field class="half-width">
+                    <mat-label></mat-label>
+                    <input matInput placeholder="StayPrivate Admin Console" [value]="themeForm.value.name" formControlName="name" autocomplete="off" >
+                  </mat-form-field>
+                </div>
+              </div>
+              </div>
+          </div>
+          <div class="row button-container">
+            <button mat-flat-button color="primary"  class="sp-background theme-button" (click)="onSubmit()">Update theme</button>
+            <button *ngIf="themeForm.dirty" mat-flat-button color="primary" ngif class="theme-button clear-button" (click)="onClear()">Clear changes</button>
+          </div>
+        </mat-card-content>
+        <hr/><br/>
+          <mat-card-title class="title-spacer sp-title">Your logo</mat-card-title>
+          <mat-card  class="logo-box">
+            
+            <img class="loginImage image-adj" [src]="img"/><br>
+            
+          </mat-card>
+          <div class="row button-container">
+            <label class="custom-file-upload sp-background logo-button">
+              Change logo
+              <input type='file' (change)="onFileChange($event)" >
+            </label>
+          </div>
+      </mat-card>
+    </form>        
+    </mat-sidenav-content>
+</mat-sidenav-container>

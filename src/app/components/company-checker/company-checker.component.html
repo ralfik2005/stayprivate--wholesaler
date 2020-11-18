@@ -1,0 +1,41 @@
+<h1 mat-dialog-title class="add-company-title sp-title" style="font-size: 19px;">Checking your domains...</h1>
+
+<div *ngFor="let record of records" style="padding: 5px;">
+    <mat-divider></mat-divider>
+    <p style="margin-bottom: 0px;margin-top: 10px; font-size: 17px;" class="add-company-title sp-title">{{record.name}}</p>
+    <p style="margin-bottom: 0px; height: 25px;">SPF Check: 
+        <mat-icon *ngIf="record.spfBool==true" style="top: 7px; display: inline-block;position: relative;color: green;">done</mat-icon>
+        <mat-icon *ngIf="record.spfBool==false" style="top: 7px; display: inline-block;position: relative;color: red;">close</mat-icon>
+        <mat-spinner *ngIf="record.spfBool==null" [diameter]="23" style="top: 10px; display: inline-block;"></mat-spinner>
+    </p>
+    <p style="margin-bottom: 5px; height: 25px;">
+        DKIM Check: 
+        <mat-icon *ngIf="record.dkimBool==true" style="top: 7px; display: inline-block;position: relative;color: green;">done</mat-icon>
+        <mat-icon *ngIf="record.dkimBool==false" style="top: 7px; display: inline-block;position: relative;color: red;">close</mat-icon>
+        <mat-spinner *ngIf="record.dkimBool==null" [diameter]="23" style="top: 7px; display: inline-block;"></mat-spinner>
+    </p>  
+    <mat-error *ngIf="record.spfError!=null&&record.spfError!='Email not found'&&record.spfError!='Failed to reach server. Please try again.'">
+        {{record.spfError}}.
+    </mat-error>
+    <mat-error *ngIf="record.dkimError!=null">
+        {{record.dkimError}}.
+    </mat-error>
+</div>
+<mat-error>{{message}}</mat-error>
+<div mat-dialog-actions>
+    <button mat-button class="cancel-button" (click)="onNoClick()">Cancel</button>
+    <button mat-button class="ok-button" [disabled]="!valid" (click)="onSubmit()" >OK</button>
+  </div>
+<!-- <mat-list role="list">
+    <mat-list-item *ngFor="let record of records" role="listitem">
+        {{record.name}}<br>
+        SPF Check: {{record.spfBool}}<br>
+        <mat-error *ngIf="record.SPFError!=null">
+            {{record.spfError}}
+        </mat-error>
+        DKIM Check: {{record.dkimBool}}<br>
+        <mat-error *ngIf="record.dkimError!=null">
+            {{record.dkimError}}
+        </mat-error>
+    </mat-list-item>
+</mat-list> -->

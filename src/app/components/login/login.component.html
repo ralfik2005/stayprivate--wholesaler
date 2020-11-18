@@ -1,0 +1,64 @@
+<div class="full-screen">
+  <div class="centered">
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()" >
+      <mat-card class="form-padding">
+        <div class="loginImageContainer">
+          <img class="loginImage" [src]="img"/>
+        </div>
+        <mat-card-title class="sp-title">
+          Dashboard Log In
+        </mat-card-title>
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="name@yourcompany.com" formControlName="UserName">
+                <mat-error *ngIf="loginForm.controls['UserName'].hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-label>Enter your password</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="UserPwd">
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                  <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="loginForm.controls['UserPwd'].hasError('required')">
+                  Password is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <button mat-flat-button color="primary" class="sp-background">Log In</button>
+          </div>
+          <div class="row">
+            <a mat-flat-button routerLink="/forgot-password" class="sp-title">
+              Forgotten password
+            </a>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+      
+      
+    </form>
+    <div>
+      <p style="padding: 20px 10px;" >By logging into this dashboard you accept that you will use it in accordance with the StayPrivate <a class="login-tcs" target="_blank" href="https://stayprivate.com/terms.html">terms</a>.</p>
+    </div>
+  </div>
+  
+  <div>
+    <span class="login-powered">
+      Powered by 
+      <img class="login-img"src="/assets/images/SP_Logo_Icon+Text_Blue.svg"/>
+    </span>
+  </div>
+</div>
+<!-- SP_Logo_Icon+Text_Blue.svg -->
+

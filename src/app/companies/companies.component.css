@@ -1,0 +1,7 @@
+.companies {line-height: 32px;}
+
+.companies li {cursor: pointer;}
+
+.companies li.selected {
+    background-color: #888;
+}

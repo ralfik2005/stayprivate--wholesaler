@@ -1,0 +1,29 @@
+<mat-form-field appearance="fill" class="chart-top">
+  <mat-label>Chart display</mat-label>
+  <mat-select [(value)]="selectedChart" (selectionChange)="onSwitch()">
+    <mat-option *ngFor="let chart of charts" [value]="chart.value">
+      {{chart.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div #containerRef class="chart-container mat-elevation-z2">
+ 
+  <ngx-charts-line-chart
+  [view]="[containerRef.offsetWidth - 40, containerRef.offsetHeight -20]"
+  [scheme]="colorScheme"
+  [legend]="false"
+  [roundDomains]="true"
+  [legendTitle] = ""
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxis]="xAxis"
+  [yAxis]="yAxis"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [results]="multi"
+  [yScaleMax]="scaleMax"
+  >
+</ngx-charts-line-chart>
+
+</div>

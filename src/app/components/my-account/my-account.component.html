@@ -1,0 +1,115 @@
+<mat-toolbar>
+    <button mat-button class="nav-menu-button sp-topnav" (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span class="top-title sp-topnav">{{appName}}</span>
+
+    <div class="top-right-button">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+            <mat-icon class="">account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/account']">
+                <mat-icon>account_circle</mat-icon>
+                <span>My Account</span>
+            </button>
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Log Out</span>
+            </button>
+        </mat-menu>
+    </div>
+
+</mat-toolbar>
+<mat-sidenav-container class="main-container">
+    <mat-sidenav class="sidenav-container" [opened]="start" #sidenav [mode]="mode.value">
+        <div>
+            <button mat-button class="nav-menu-link sp-sidenav" [routerLink]="['/home']">
+                Home
+            </button>
+        </div>
+        <div *ngIf="myCompanyType=='Wholesaler'||myCompanyType=='Super'||myCompanyType=='Reseller'">
+            <button mat-button class="nav-menu-link sp-sidenav" [routerLink]="['/add-company']">
+                Add New Company
+            </button>
+        </div>
+        <div>
+            <button mat-button class="nav-menu-link sp-sidenav" [routerLink]="['/mycompany']">
+                My Company
+            </button>
+        </div>
+        <div *ngIf="myCompanyType=='Wholesaler'||myCompanyType=='Super'">
+            <button mat-button class="nav-menu-link sp-sidenav" [routerLink]="['/edit-theme']">
+                My Theme
+            </button>
+        </div>
+        <div>
+            <button mat-button class="nav-menu-link sp-sidenav">
+                Contracts &amp; Terms
+            </button>
+        </div>
+        <div>
+            <button mat-button class="nav-menu-link sp-sidenav">
+                User Guides
+            </button>
+        </div>
+        <div>
+            <hr class="nav-menu-sp"style="width: 200px; bottom: 40px">
+            <span class="nav-menu-link nav-menu-sp sp-sidenav ">        
+              Powered by
+              <img class="loginImage nav-menu-img" src="/assets/images/SP_Logo_Icon+Text_Blue.svg"/>
+            </span>
+          </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="main-stage">
+        <mat-card class="form-padding">
+            <mat-card-title class="add-company-title sp-title">
+                My Account
+            </mat-card-title>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-md shorter-col">
+                        <form [formGroup]="detailsForm" class="account-form">
+                            <!-- Email Address -->
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field class="full-width">
+                                        <mat-label>Email address</mat-label>
+                                        <input matInput placeholder="" formControlName="emailAddress">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!-- User Name -->
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field class="full-width">
+                                        <mat-label>Username</mat-label>
+                                        <input matInput placeholder="" formControlName="username">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!-- Personal Name -->
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field class="full-width">
+                                        <mat-label>Personal Name</mat-label>
+                                        <input matInput placeholder="" formControlName="name">
+                                    </mat-form-field>
+                                    <button *ngIf="!editMode" mat-icon-button (click)="editClicked()">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                    <button *ngIf="editMode&&detailsForm.dirty" mat-flat-button color="primary"
+                                        class="sp-background update-button" (click)="onSubmit()">Update</button>
+                                    <button *ngIf="editMode" mat-button color="primary" class="cancel-button"
+                                        (click)="onCancel()">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                        <button mat-flat-button color="primary" class="sp-background password-button" (click)="openEditPassword()">Change Password</button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-sidenav-content>
+</mat-sidenav-container>
