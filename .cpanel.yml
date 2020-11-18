@@ -1,0 +1,5 @@
+---
+deployment:
+ tasks:
+ - export DEPLOYPATH=/home/sptest1/public_html/company-234/
+ - /bin/cp -fr * $DEPLOYPATH
